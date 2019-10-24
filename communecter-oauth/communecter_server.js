@@ -18,6 +18,7 @@ OAuth.registerService('communecter', 2, null, function (query) {
     serviceData.accessToken = userinfo.accessToken;
     serviceData.expiresAt = userinfo.expiresAt;
     serviceData.email = userinfo.email;
+    serviceData.token = userinfo.apiToken;
 
     if (accessToken) {
         var tokenContent = getTokenContent(accessToken);
@@ -152,7 +153,8 @@ var getUserInfoFromEndpoint = function (accessToken, config) {
         accessToken: OAuth.sealSecret(accessToken),
         expiresAt: userinfo.expiresAt,
         email: userinfo.email,
-        name: userinfo.name
+        name: userinfo.name,
+        apiToken: userinfo.apiToken
     };
 }
 
@@ -166,6 +168,7 @@ var getUserInfoFromToken = function (accessToken) {
         accessToken: OAuth.sealSecret(accessToken),
         expiresAt: tokenContent.exp,
         email: mainEmail,
-        name: tokenContent.name
+        name: tokenContent.name,
+        apiToken: tokenContent.apiToken
     }
 }
